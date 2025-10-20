@@ -1,0 +1,6 @@
+[submodule "programs/Project_CodeNet"]
+	path = programs/Project_CodeNet
+	url = https://github.com/IBM/Project_CodeNet.git
+[submodule "programs/sactor"]
+	path = programs/sactor
+	url = https://github.com/qsdrqs/sactor.git

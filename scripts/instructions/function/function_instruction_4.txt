@@ -1,0 +1,10 @@
+Translate the given C function into safe, idiomatic Rust.
+Output only the Rust function code — no explanations.
+
+Rules:
+	•	Maintain equivalent logic and side effects.
+	•	Prefer safe Rust; use unsafe only when required.
+	•	Use Result/Option, &str, Vec, and RAII memory management.
+	•	Follow Rust conventions (snake_case, no extra dependencies).
+
+Translate the C function below:

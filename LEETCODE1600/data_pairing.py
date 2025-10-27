@@ -263,9 +263,9 @@ def filter_pairs(data_dir="LEETCODE_DEDUP",
 if __name__ == "__main__":
     # code2AST(data_dir= "./Output/intermediate/second_filter", outdir= "./Output/intermediate/LEETCODE_AST")
     # dedup_dataset(
-    #     data_dir="./Output/intermediate/LEETCODE_AST",
-    #     outdir="./Output/intermediate/LEETCODE_DeDup",
-    #     duplicate_threshold=0.80)
+    #      data_dir="./Output/intermediate/LEETCODE_AST",
+    #      outdir="./Output/intermediate/LEETCODE_DeDup",
+    #      duplicate_threshold=0.80)
     filter_pairs(data_dir="./Output/intermediate/LEETCODE_DeDup",
                  outdir="./Output/LEETCODE_Data",
-                 threshold=[0.85, 0.60, 0.30])
+                 threshold=[0.7, 0.50, 0.30])

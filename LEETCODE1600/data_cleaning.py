@@ -130,5 +130,5 @@ def second_filter(output):
     print("=" * 70)
 
 if __name__ == "__main__":
-    #first_filter("./leetcode", "./Output/intermediate/first_filter")
+    first_filter("./leetcode", "./Output/intermediate/first_filter")
     second_filter("./Output/intermediate/second_filter")

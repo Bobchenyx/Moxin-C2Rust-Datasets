@@ -1,1 +1,0 @@
-(translation_unit (return_statement (return) (binary_expression (binary_expression (identifier) (*) (parenthesized_expression (() (binary_expression (identifier) (+) (number_literal)) ()))) (/) (number_literal)) (;)))

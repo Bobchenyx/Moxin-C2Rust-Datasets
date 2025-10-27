@@ -1,1 +1,0 @@
-(translation_unit (if_statement (if) (parenthesized_expression (() (binary_expression (identifier) (==) (number_literal)) ())) (return_statement (return) (binary_expression (identifier) (%) (number_literal)) (;))))

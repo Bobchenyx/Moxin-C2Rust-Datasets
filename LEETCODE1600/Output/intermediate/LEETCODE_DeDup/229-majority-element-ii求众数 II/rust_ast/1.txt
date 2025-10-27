@@ -1,1 +1,0 @@
-(source_file (let_declaration (let) (mutable_specifier) (identifier) (=) (integer_literal) (;)) (let_declaration (let) (mutable_specifier) (identifier) (=) (integer_literal) (;)) (let_declaration (let) (mutable_specifier) (identifier) (=) (integer_literal) (;)) (let_declaration (let) (mutable_specifier) (identifier) (=) (integer_literal) (;)))

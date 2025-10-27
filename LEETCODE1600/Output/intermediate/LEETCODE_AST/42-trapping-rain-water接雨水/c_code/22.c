@@ -1,1 +1,0 @@
-rain[i] = MIN(左边最高值, 右边最高值) - Height[i]

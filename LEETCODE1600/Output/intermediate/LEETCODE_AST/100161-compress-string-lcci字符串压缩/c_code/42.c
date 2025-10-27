@@ -1,1 +1,0 @@
-res = res + c + to_string(count);

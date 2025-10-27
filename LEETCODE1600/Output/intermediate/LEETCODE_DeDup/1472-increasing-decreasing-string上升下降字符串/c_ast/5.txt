@@ -1,1 +1,0 @@
-(translation_unit (ERROR (binary_expression (identifier) (-) (identifier))))

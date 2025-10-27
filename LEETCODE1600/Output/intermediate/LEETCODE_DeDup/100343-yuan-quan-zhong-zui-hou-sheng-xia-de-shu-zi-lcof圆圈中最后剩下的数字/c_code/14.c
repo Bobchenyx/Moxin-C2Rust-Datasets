@@ -1,1 +1,0 @@
-if(n==2) return m%2;

@@ -1,1 +1,0 @@
-(translation_unit (declaration (type_identifier) (comment) (identifier) (comment) (;)))

@@ -1,1 +1,0 @@
-(translation_unit (ERROR (string_literal (") (string_content) (")) (->) (concatenated_string (string_literal (") (string_content) (")) (string_literal (") (string_content) ("))) (->) (string_literal (") (string_content) ("))))

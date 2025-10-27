@@ -1,1 +1,0 @@
-(source_file (ERROR (parenthesized_expression (() (integer_literal) ())) (ERROR) (identifier) (ERROR) (identifier) (ERROR) (identifier) (ERROR)))

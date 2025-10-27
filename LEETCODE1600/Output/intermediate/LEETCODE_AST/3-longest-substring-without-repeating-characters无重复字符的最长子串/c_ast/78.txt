@@ -1,1 +1,0 @@
-(translation_unit (declaration (type_identifier) (ERROR (number_literal) (number_literal) (identifier) (ERROR)) (identifier) (;)))

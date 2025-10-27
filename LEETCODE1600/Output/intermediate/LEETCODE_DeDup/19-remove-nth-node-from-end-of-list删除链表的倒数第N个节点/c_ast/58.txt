@@ -1,1 +1,0 @@
-(translation_unit (ERROR (number_literal) (->) (number_literal) (->) (number_literal) (->) (number_literal) (->) (number_literal) (,) (binary_expression (number_literal) (-) (ERROR (number_literal) (number_literal)) (number_literal)) (number_literal)))

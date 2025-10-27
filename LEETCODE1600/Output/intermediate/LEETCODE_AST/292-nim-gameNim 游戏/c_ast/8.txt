@@ -1,1 +1,0 @@
-(translation_unit (function_definition (primitive_type) (function_declarator (identifier) (parameter_list (() (parameter_declaration (primitive_type) (identifier)) ()))) (compound_statement ({) (return_statement (return) (binary_expression (binary_expression (identifier) (%) (number_literal)) (!=) (number_literal)) (;)) (}))))

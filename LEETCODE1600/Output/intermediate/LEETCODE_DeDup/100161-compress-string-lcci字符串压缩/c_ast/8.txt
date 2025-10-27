@@ -1,1 +1,0 @@
-(translation_unit (expression_statement (call_expression (identifier) (argument_list (() (identifier) (,) (string_literal (") (string_content) (")) (,) (identifier) ()))) (;)) (declaration (type_identifier) (ERROR (ERROR) (identifier) (ERROR) (identifier) (ERROR) (identifier) (+) (identifier) (ERROR) (identifier) (ERROR)) (identifier) (;)))

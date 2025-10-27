@@ -1,1 +1,0 @@
-solveNQueens(int n, int* returnSize, int** returnColumnSizes)

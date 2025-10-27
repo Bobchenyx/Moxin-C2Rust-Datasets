@@ -1,1 +1,0 @@
-(translation_unit (ERROR (number_literal) (identifier) (number_literal) (identifier)))

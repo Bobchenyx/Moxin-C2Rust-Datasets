@@ -1,1 +1,0 @@
-(translation_unit (ERROR (subscript_expression (identifier) ([) (number_literal) (])) (unary_expression (~) (subscript_expression (identifier) ([) (binary_expression (identifier) (-) (number_literal)) (])))))

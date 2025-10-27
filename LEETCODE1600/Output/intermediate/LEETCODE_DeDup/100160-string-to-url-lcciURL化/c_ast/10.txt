@@ -1,1 +1,0 @@
-(translation_unit (ERROR (concatenated_string (identifier) (ERROR (ERROR)) (string_literal (") (string_content) ("))) (,) (number_literal) (concatenated_string (identifier) (ERROR (ERROR)) (string_literal (") (string_content) (")))))

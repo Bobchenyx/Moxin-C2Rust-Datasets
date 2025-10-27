@@ -1,6 +1,0 @@
-\\...
-while let (Some(_), Some(s)) = (&fast, &fast.as_ref().unwrap().next) {
-    fast = &s.as_ref().next;
-    slow = &slow.as_ref().unwrap().next;
-}
-\\...

@@ -1,0 +1,1 @@
+(translation_unit (ERROR (macro_type_specifier (identifier) (() (type_descriptor (primitive_type)) ())) (identifier) (,) (ERROR (identifier)) (pointer_declarator (*) (identifier)) (,) (ERROR (identifier)) (pointer_declarator (*) (pointer_declarator (*) (identifier))) ())))

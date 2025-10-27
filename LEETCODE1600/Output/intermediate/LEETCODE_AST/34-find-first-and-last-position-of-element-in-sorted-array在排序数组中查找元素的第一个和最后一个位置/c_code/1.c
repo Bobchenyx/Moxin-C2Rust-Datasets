@@ -1,0 +1,1 @@
+return nums[left] == target ? left : -1;

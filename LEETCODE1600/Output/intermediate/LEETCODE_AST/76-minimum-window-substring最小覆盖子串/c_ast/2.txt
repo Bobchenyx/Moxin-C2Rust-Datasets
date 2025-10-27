@@ -1,0 +1,1 @@
+(translation_unit (ERROR (char_literal (') (escape_sequence) ('))))

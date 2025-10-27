@@ -1,0 +1,14 @@
+int minIncrementForUnique(int* A, int ASize){
+    int a[80000]={0},count=0;
+    for(int i=0;i<ASize;i++){
+        a[A[i]]++;
+    }    
+    for(int i=0;i<80000;i++){
+        if(a[i] > 1){
+            a[i+1] += a[i]-1;
+            count += a[i]-1;
+            a[i] =1;
+        }
+    }
+    return count;
+}

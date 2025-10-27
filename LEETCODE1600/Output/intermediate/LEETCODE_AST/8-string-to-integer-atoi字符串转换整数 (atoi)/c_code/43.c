@@ -1,0 +1,1 @@
+(int)result != result;  // 如果作int强制类型转化后不等于自己，则存储的数超过了int范围

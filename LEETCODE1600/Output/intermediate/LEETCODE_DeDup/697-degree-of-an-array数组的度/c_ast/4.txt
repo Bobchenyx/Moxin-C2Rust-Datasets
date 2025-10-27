@@ -1,0 +1,1 @@
+(translation_unit (struct_specifier (struct) (type_identifier) (field_declaration_list ({) (field_declaration (sized_type_specifier (unsigned) (short)) (field_identifier) (;)) (field_declaration (sized_type_specifier (unsigned) (short)) (field_identifier) (;)) (field_declaration (sized_type_specifier (unsigned) (short)) (field_identifier) (;)) (}))) (;))

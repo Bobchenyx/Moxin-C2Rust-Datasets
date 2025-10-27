@@ -1,0 +1,15 @@
+int searchInsert(int* nums, int numsSize, int target){
+
+    int l = 0, r = numsSize - 1, mid;
+    while (l <= r) {
+        mid = l+ (r - l)/2;
+        if (nums[mid] == target)
+            return mid;
+        else if (nums[mid] < target)
+            l = mid + 1;
+        else
+            r = mid - 1;
+    }
+    //此题，正好返回left即可， left最后比right小1
+    return l;
+}

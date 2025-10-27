@@ -1,0 +1,1 @@
+(translation_unit (comment) (type_definition (typedef) (struct_specifier (struct) (field_declaration_list ({) (field_declaration (primitive_type) (pointer_declarator (*) (field_identifier)) (;)) (field_declaration (primitive_type) (field_identifier) (;)) (comment) (field_declaration (primitive_type) (field_identifier) (;)) (comment) (}))) (type_identifier) (;)))

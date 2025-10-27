@@ -1,0 +1,1 @@
+(translation_unit (ERROR (subscript_expression (subscript_expression (identifier) (ERROR (=)) ([) (ERROR (number_literal) (,)) (number_literal) (])) (ERROR (identifier) (=)) ([) (number_literal) (])) (identifier) (number_literal)))

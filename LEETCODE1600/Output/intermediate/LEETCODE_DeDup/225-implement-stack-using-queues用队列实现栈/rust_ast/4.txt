@@ -1,0 +1,1 @@
+(source_file (expression_statement (struct_expression (type_identifier) (field_initializer_list ({) (field_initializer (field_identifier) (:) (call_expression (scoped_identifier (identifier) (::) (identifier)) (arguments (() ())))) (,) (}))) (;)))

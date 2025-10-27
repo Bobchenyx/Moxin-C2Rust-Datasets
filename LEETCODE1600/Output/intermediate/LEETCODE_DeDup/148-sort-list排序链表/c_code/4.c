@@ -1,0 +1,12 @@
+fast=head;
+slow=head;
+while(fast->next)
+{
+    fast=fast->next;
+    if(fast->next){
+        fast=fast->next;
+        slow=slow->next;
+    }else{
+        break;
+    }
+}

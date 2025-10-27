@@ -1,0 +1,1 @@
+(translation_unit (if_statement (if) (parenthesized_expression (() (binary_expression (binary_expression (binary_expression (identifier) (*) (identifier)) (<) (identifier)) (&&) (binary_expression (binary_expression (identifier) (*) (identifier)) (>) (identifier))) ())) (compound_statement ({) (return_statement (return) (identifier) (;)) (}))))

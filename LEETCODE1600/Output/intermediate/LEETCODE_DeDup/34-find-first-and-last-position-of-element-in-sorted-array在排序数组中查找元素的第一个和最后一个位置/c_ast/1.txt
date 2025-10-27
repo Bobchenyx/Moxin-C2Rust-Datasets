@@ -1,0 +1,1 @@
+(translation_unit (return_statement (return) (conditional_expression (binary_expression (subscript_expression (identifier) ([) (identifier) (])) (==) (identifier)) (?) (identifier) (:) (number_literal)) (;)))

@@ -1,0 +1,3 @@
+MyStack{
+    queue: VecDeque::new(),
+}

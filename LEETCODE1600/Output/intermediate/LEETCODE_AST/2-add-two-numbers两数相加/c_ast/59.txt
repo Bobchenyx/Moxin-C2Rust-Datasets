@@ -1,0 +1,1 @@
+(translation_unit (ERROR (number_literal) (type_identifier) (ERROR (ERROR) (identifier) (number_literal) (identifier) (ERROR) (identifier) (ERROR) (identifier) (number_literal) (identifier) (number_literal) (identifier) (ERROR)) (array_declarator (identifier) ([) (identifier) (])) (() (identifier) (:)) (comment))

@@ -1,0 +1,1 @@
+temp += ((long)abs(x % 10) * (exponent_num(count-i-1)));

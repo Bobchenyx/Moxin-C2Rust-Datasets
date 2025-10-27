@@ -1,0 +1,19 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* maxDepthAfterSplit(char * seq, int* returnSize){
+    int sl = strlen(seq);
+    int isA = 0;
+    *returnSize = sl;
+    // 分配内存
+    int * ret = (int *)malloc(sizeof(int) * sl);
+    // 开始遍历
+    for (int i = 0; i < sl; i++) {
+        // 判断与前一个相同则交换分配
+        if (i != 0 && seq[i] == seq[i - 1]) {
+            isA = 1 - isA;
+        }
+        ret[i] = isA;
+    }
+    return ret;
+}

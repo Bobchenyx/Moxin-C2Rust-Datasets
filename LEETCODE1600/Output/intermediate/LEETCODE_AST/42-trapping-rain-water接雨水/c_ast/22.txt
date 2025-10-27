@@ -1,0 +1,1 @@
+(translation_unit (expression_statement (assignment_expression (subscript_expression (identifier) ([) (identifier) (])) (=) (binary_expression (call_expression (identifier) (argument_list (() (identifier) (,) (identifier) ()))) (-) (subscript_expression (identifier) ([) (identifier) (])))) (;)))

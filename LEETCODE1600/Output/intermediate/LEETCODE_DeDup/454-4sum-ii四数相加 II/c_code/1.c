@@ -1,0 +1,1 @@
+int nowIndex = (tempIndex - dict);

@@ -1,0 +1,1 @@
+(source_file (impl_item (impl) (type_identifier) (declaration_list ({) (line_comment (//) (outer_doc_comment_marker (/)) (doc_comment)) (}))))

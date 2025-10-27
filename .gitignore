@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
-LEETCODE1600/Output/intermediate
+LEETCODE1600/Output
+LEETCODE1600/leetcode
 .DS_Store
 .vscode/

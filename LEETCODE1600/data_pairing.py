@@ -4,18 +4,33 @@ from tree_sitter import Language, Parser
 import tree_sitter_c as tsc
 import tree_sitter_rust as tsr
 from similarity import similarity, similarity_same_lang
-
-
+from strip_impl import strip_impl_solution_blocks
+import sys
+sys.setrecursionlimit(5000)
 # Helper function to convert tree-sitter node to S-expression format
-def node_to_sexp(node):
-    """Convert a tree-sitter node to S-expression format"""
-    if node.child_count == 0:
-        # Leaf node
-        return f"({node.type})"
-    else:
-        # Internal node with children
-        children = " ".join(node_to_sexp(child) for child in node.children)
-        return f"({node.type} {children})"
+def node_to_sexp(root):
+    stack = [(root, 0)]
+    out = []
+
+    while stack:
+        node, state = stack.pop()
+
+        if state == 0:
+            # leaf?
+            if node.child_count == 0:
+                out.append(node.type)
+                continue
+
+            # open, then revisit after children
+            out.append(f"({node.type}")
+            stack.append((node, 1))
+            # push children in reverse so leftmost is processed first
+            for i in range(node.child_count - 1, -1, -1):
+                stack.append((node.child(i), 0))
+        else:
+            out.append(")")
+
+    return " ".join(out)
 
 
 # Setup languages and parsers
@@ -33,8 +48,8 @@ def code2AST(data_dir="LEETCODE1600", outdir="LEETCODE_AST"):
         problem_dir = os.path.join(data_dir, filename)
         
         if os.path.isdir(problem_dir) and os.listdir(problem_dir):
-            c_dir = os.path.join(problem_dir, "c")
-            rust_dir = os.path.join(problem_dir, "rust")
+            c_dir = os.path.join(problem_dir, "C")
+            rust_dir = os.path.join(problem_dir, "Rust")
             
             # C list
             c_code_list = []
@@ -122,7 +137,13 @@ def _dedup_lang(ast_dir, code_dir, out_code_dir, out_ast_dir, ext, lang, thresho
                 continue
             with open(os.path.join(ast_dir, fj), "r", encoding="utf-8") as g:
                 s_j = g.read().strip()
-            if similarity_same_lang(s_i, s_j, lang=lang) >= threshold:
+            try:
+                score = similarity_same_lang(s_i, s_j, lang=lang)
+            except Exception as e:
+                print(f"[SKIP] similarity_same_lang crashed {ast_dir}: {fi} vs {fj} -> {e}")
+                continue
+
+            if score >= threshold:
                 dropped.add(fj)
 
     os.makedirs(out_code_dir, exist_ok=True)
@@ -176,16 +197,12 @@ def dedup_dataset(data_dir="LEETCODE_AST", outdir="LEETCODE_DEDUP", duplicate_th
 
 def filter_pairs(data_dir="LEETCODE_DEDUP",
                  outdir="LEETCODE_PAIRED",
-                 threshold=[0.85, 0.70, 0.60]):
+                 threshold=[0.9, 0.80, 0.70]):
     """
-    For each C AST, pick at most one Rust per band:
-      [t0, +inf), [t1, t0), [t2, t1)
-    where t0 >= t1 >= t2 from `threshold`.
-    Copies the matched .c and .rs into pair_* folders and
-    writes scores into the summary dict.
+    Threshold = [Upper bound, middle bound, lower bound]
     """
     t = sorted(threshold, reverse=True)
-    bands = [(t[0], float("inf")), (t[1], t[0]), (t[2], t[1])]
+    bands = [(t[0], float(0.9999)), (t[1], t[0]), (t[2], t[1])]
 
     def ast_files(d):
         return sorted(f for f in os.listdir(d) if f.endswith(".txt"))
@@ -221,7 +238,11 @@ def filter_pairs(data_dir="LEETCODE_DEDUP",
             for rust_ast_file in r_files:
                 with open(os.path.join(rust_ast_dir, rust_ast_file), "r", encoding="utf-8") as f:
                     r_text = f.read().strip()
-                score = similarity(c_text, r_text)
+                try:
+                    score = similarity(c_text, r_text)
+                except Exception as e:
+                    print(f"[SKIP] similarity crashed: {prob} C={c_ast_file} R={rust_ast_file} -> {e}")
+                    continue
                 r_key = os.path.splitext(rust_ast_file)[0]
                 results.append((score, r_key))
 
@@ -242,10 +263,24 @@ def filter_pairs(data_dir="LEETCODE_DEDUP",
             for r_key, s in picked.items():
                 pair_dir = os.path.join(outdir, prob, f"pair_{pair_count}")
                 os.makedirs(pair_dir, exist_ok=True)
-                shutil.copy(os.path.join(c_code_dir,  f"{c_key}.c"),
-                            os.path.join(pair_dir,   f"{c_key}.c"))
-                shutil.copy(os.path.join(rust_code_dir, f"{r_key}.rs"),
-                            os.path.join(pair_dir,     f"{r_key}.rs"))
+
+                # copy C file
+                shutil.copy(
+                    os.path.join(c_code_dir, f"{c_key}.c"),
+                    os.path.join(pair_dir,    f"{c_key}.c")
+                )
+
+                # read rust, strip impl Solution { ... }, then save
+                rust_src = os.path.join(rust_code_dir, f"{r_key}.rs")
+                with open(rust_src, "r", encoding="utf-8") as f:
+                    rust_text = f.read()
+
+                cleaned_rust, _removed = strip_impl_solution_blocks(rust_text)
+
+                rust_dst = os.path.join(pair_dir, f"{r_key}.rs")
+                with open(rust_dst, "w", encoding="utf-8") as f:
+                    f.write(cleaned_rust)
+
                 pair_count += 1
                 total_pairs += 1
 
@@ -261,11 +296,11 @@ def filter_pairs(data_dir="LEETCODE_DEDUP",
     return summary
 
 if __name__ == "__main__":
-    # code2AST(data_dir= "./Output/intermediate/second_filter", outdir= "./Output/intermediate/LEETCODE_AST")
+    #code2AST(data_dir= "CodeNet", outdir= "./Output/intermediate/CodeNet_AST")
     # dedup_dataset(
-    #      data_dir="./Output/intermediate/LEETCODE_AST",
-    #      outdir="./Output/intermediate/LEETCODE_DeDup",
+    #      data_dir="./Output/intermediate/CodeNet_AST",
+    #      outdir="./Output/intermediate/CodeNet_Dedup",
     #      duplicate_threshold=0.80)
-    filter_pairs(data_dir="./Output/intermediate/LEETCODE_DeDup",
-                 outdir="./Output/LEETCODE_Data",
-                 threshold=[0.7, 0.50, 0.30])
+    filter_pairs(data_dir="./Output/intermediate/CodeNet_Dedup",
+                 outdir="./Output/CodeNet_Paired_woDup",
+                 threshold=[0.7, 0.60, 0.40])

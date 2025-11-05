@@ -6,30 +6,66 @@ def similarity(c_sexpr: str, r_sexpr: str) -> float:
         s = re.sub(r'\b[A-Za-z_]+:\s*', '', s)
         toks = re.findall(r'\(|\)|[^\s()]+', s)
 
-        def parse_at(i: int):
-            # expects '(' at toks[i]
+        def parse_at_iter(toks, i):
+            """
+            Parse an S-expression starting at toks[i] == '('.
+            Returns: (node_tuple, next_index)
+            node_tuple = (label: str, children: list[tuple])
+            """
             if i >= len(toks) or toks[i] != '(':
                 return None, i
             i += 1
-            # allow empty parens just in case: ()
+
+            # allow empty/unterminated: ()
             if i >= len(toks):
                 return ("nil", []), i
+
+            # read label
             label = toks[i]
             i += 1
-            children = []
-            while i < len(toks):
+
+            # stacks for building tuples without recursion
+            label_stack = [label]
+            kids_stack  = [[]]
+
+            # safety: prevent infinite loops on malformed inputs
+            max_steps = 10_000_000
+            steps = 0
+
+            while i < len(toks) and steps < max_steps:
+                steps += 1
                 t = toks[i]
+
                 if t == '(':
-                    child, i = parse_at(i)
-                    if child is not None:
-                        children.append(child)
+                    i += 1
+                    if i >= len(toks):
+                        # unterminated list; return what we have
+                        return (label_stack[0], kids_stack[0]), i
+                    lbl = toks[i]
+                    i += 1
+                    label_stack.append(lbl)
+                    kids_stack.append([])
+
                 elif t == ')':
                     i += 1
-                    break
+                    node = (label_stack.pop(), kids_stack.pop())
+                    if kids_stack:
+                        kids_stack[-1].append(node)
+                    else:
+                        # closed the root list
+                        return node, i
+
                 else:
-                    # bare atoms inside lists: ignore (tree-sitter usually wraps as (node ...))
+                    # atom inside list (you currently ignore them)
                     i += 1
-            return (label, children), i
+
+            # if we exit the loop without closing, return partial tree
+            return (label_stack[0], kids_stack[0]), i
+
+
+        # keep your original name/signature:
+        def parse_at(i: int):
+            return parse_at_iter(toks, i)
 
         roots = []
         i = 0

@@ -15,8 +15,6 @@ def similarity(c_sexpr: str, r_sexpr: str) -> float:
             if i >= len(toks) or toks[i] != '(':
                 return None, i
             i += 1
-
-            # allow empty/unterminated: ()
             if i >= len(toks):
                 return ("nil", []), i
 
@@ -39,7 +37,6 @@ def similarity(c_sexpr: str, r_sexpr: str) -> float:
                 if t == '(':
                     i += 1
                     if i >= len(toks):
-                        # unterminated list; return what we have
                         return (label_stack[0], kids_stack[0]), i
                     lbl = toks[i]
                     i += 1
@@ -56,14 +53,11 @@ def similarity(c_sexpr: str, r_sexpr: str) -> float:
                         return node, i
 
                 else:
-                    # atom inside list (you currently ignore them)
                     i += 1
 
-            # if we exit the loop without closing, return partial tree
             return (label_stack[0], kids_stack[0]), i
 
 
-        # keep your original name/signature:
         def parse_at(i: int):
             return parse_at_iter(toks, i)
 

@@ -2,5 +2,6 @@ __pycache__/
 *.pyc
 LEETCODE1600/Output
 LEETCODE1600/leetcode
+LEETCODE1600/CodeNet
 .DS_Store
 .vscode/
